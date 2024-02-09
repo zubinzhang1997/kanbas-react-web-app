@@ -1,0 +1,99 @@
+/* Ensure the container stretches fully without default padding */
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* If .d-flex or another wrapper affects the sidebar, ensure no spacing on the left */
+.d-flex {
+    margin-left: 0;
+}
+.wd-kanbas-navigation {
+    background-color: black;
+    list-style: none;
+    color:white;
+    font-family: sans-serif;
+    padding: 0px;
+    margin: px;
+    width: 80px;
+    text-align: center;
+    min-height: max(100vh, 100%);
+}
+.wd-kanbas-navigation li {
+    padding: 10px;     margin-bottom: 10px;
+    font-size: 0.8em;  text-align: center;
+}
+.wd-kanbas-navigation li.wd-active {
+    background-color: white;
+}
+.wd-kanbas-navigation li.wd-active a {
+    color: red;
+}
+.wd-kanbas-navigation a {
+    color: white;
+    text-decoration: none;
+}
+.wd-kanbas-navigation a i {
+    color: red;
+    font-size: 2em;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.wd-kanbas-navigation img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    line-height: 1;
+}
+
+.wd-export-dropdown {
+    background-color: #f8f9fa;
+}
+
+.wd-heading-details {
+    font-size: small;
+    color: black;
+}
+
+.table > thead {
+    vertical-align: middle;
+}
+.table > tbody > tr > td {
+    text-align: center;
+}
+
+.table > thead > tr > th {
+    text-align: center;
+    font-weight: normal;
+}
+
+.wd-breadcrumb-link a:link {
+    text-decoration: none;
+    color: red;
+    margin: 20px;
+    font-weight:normal;
+}
+
+
+
+.wd-table-input {
+    width: 200px;
+    text-align: center;
+}
+
+.wd-table-input-outer {
+    width: 400px;
+}
+
+
+.wd-float-right {
+    float: right;
+}
+
+
+
+
+
+
+
