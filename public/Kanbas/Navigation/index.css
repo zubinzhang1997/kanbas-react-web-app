@@ -1,10 +1,8 @@
-/* Ensure the container stretches fully without default padding */
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
 }
 
-/* If .d-flex or another wrapper affects the sidebar, ensure no spacing on the left */
 .d-flex {
     margin-left: 0;
 }
