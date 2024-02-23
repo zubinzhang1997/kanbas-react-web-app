@@ -1,0 +1,193 @@
+.wd-navigation {
+    background-color: white;
+    list-style: none;
+    padding: 0px;
+    width: 125px;
+    margin: 0px;
+    margin-left: 20px;
+}
+.wd-navigation li {
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.wd-navigation li.wd-active {
+    border-left: 2px solid black;
+}
+.wd-navigation li.wd-active a {
+    color: black;
+}
+.wd-navigation a {
+    color: red;
+    text-decoration: none;
+}
+
+
+
+
+
+.wd-menu-button a:link {
+    padding-right: 20px;
+    color: red;
+    margin-left: -50px;
+}
+
+.wd-menu-button a:visited {
+    padding-right: 20px;
+    color: red;
+    margin-left: 25px;
+}
+
+.wd-breadcrumb-link a:link {
+    text-decoration: none;
+    color: red;
+    margin: 5px;
+}
+
+.wd-breadcrumb-link a:visited {
+    text-decoration: none;
+    color: red;
+    margin: 0px;
+}
+
+.assignment-item-title a {
+    color: black;
+    text-decoration: none;
+}
+
+.wd-add-button {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.wd-assign-border {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.mobile-header {
+    display: none;
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 20px;
+
+}
+
+@media (max-width: 576px) {
+    .mobile-header {
+        display: block;
+    }
+}
+
+.mobile-header .row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.mobile-header p {
+    margin-bottom: 0;
+}
+
+
+.wd-modules,
+.wd-modules * {
+    border-radius: 0%;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.wd-modules {
+    margin: 5px;
+}
+
+.wd-modules > li {
+    background-color: lightgray;
+    border: 1px solid rgb(128, 128, 128) !important;
+    border-left: none !important;
+}
+
+.wd-modules > li > div {
+    padding: 6px;
+    border-left: 1px solid rgb(128, 128, 128) !important;
+}
+
+.wd-modules > li > ul > li {
+    padding: 5px;
+    border-top: 1px solid rgb(128, 128, 128) !important;
+    border-left: 2px solid green;
+}
+
+.wd-modules > li {
+    margin-bottom: 20px;
+}
+
+.ellipsis {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.course-module a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.fa-plus, .fa-ellipsis-v {
+    margin-left: 10px;
+}
+
+.fa-check-circle {
+    color: #28a745;
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+.course-module a {
+    color: black;
+    text-decoration: none;
+}
+
+.course-module a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+
+.module-slide-link i.fa,
+.module-slide-link span i.fa {
+    color: red;
+}
+
+.to-do-item-title,
+.link-red,
+.link-small {
+    color: red;
+    text-decoration: none;
+}
+
+.to-do-item-title:hover,
+.link-red:hover,
+.link-small:hover {
+    color: red;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
