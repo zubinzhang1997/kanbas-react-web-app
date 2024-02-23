@@ -4,7 +4,6 @@ import {
     FaCheckCircle,
     FaEllipsisV,
     FaPlus,
-    FaPlusCircle,
     FaRegFileAlt
 } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";

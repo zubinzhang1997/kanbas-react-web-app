@@ -1,4 +1,3 @@
-import exp from "constants";
 
 function FindIndex() {
     let numberArray1 = [1, 2, 4, 5, 6];
