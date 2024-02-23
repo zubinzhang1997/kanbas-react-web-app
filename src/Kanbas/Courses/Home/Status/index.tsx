@@ -3,8 +3,7 @@ import {
     FaChartBar, FaRegBell, FaBan, FaRegArrowAltCircleLeft
 } from "react-icons/fa";
 import { GrAnnounce } from "react-icons/gr";
-import { useParams } from "react-router-dom";
-import { assignments } from "../../../Database";
+
 import "./index.css";
 import React from "react";
 
@@ -19,9 +18,6 @@ function Status() {
         { text: "New Analytics", icon: <FaChartBar /> },
         { text: "View Course Notifications", icon: <FaRegBell />},]
 
-    const { courseId } = useParams();
-    const todos = assignments.filter(
-        (assignment) => assignment.course === courseId);
 
     return (
         <>
@@ -39,7 +35,7 @@ function Status() {
             </div>
 
             <div className="button-two mb-3">
-                {buttons.map((btn, index) => (
+                {buttons.map((btn) => (
                         <button
                             type="button"
                             className="btn btn-light btn-outline-secondary mt-1">
@@ -59,13 +55,13 @@ function Status() {
                 <div className="col-9">
                     <div className="d-flex flex-column">
                         <div>
-                            <a href="#" className="to-do-item-title link-red">Grade A1 - ENV + HTML</a>
+                            <a href="/#" className="to-do-item-title link-red">Grade A1 - ENV + HTML</a>
                         </div>
                         <div className="to-do-item-detail right-sidebar-detail">100 points * Sep 18 at
                             11:59pm
                         </div>
                         <div>
-                            <a href="#" className="to-do-item-title link-red">Grade A2 - CSS + BOOTSTRAP</a>
+                            <a href="/#" className="to-do-item-title link-red">Grade A2 - CSS + BOOTSTRAP</a>
                         </div>
                         <div className="to-do-item-detail right-sidebar-detail">100 points * Oct 2 at
                             11:59pm
