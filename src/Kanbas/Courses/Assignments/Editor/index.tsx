@@ -146,7 +146,7 @@ function AssignmentEditor() {
                             </div>
                             <div className="col-md-12 mb-3">
                                 <label htmlFor="due-date" className="fw-bold">Due</label>
-                                <input type="date" className="form-control mb-3" value={assignment.dueDate}
+                                <input type="date" className="form-control mb-3" defaultValue={assignment.dueDate}
 
                                        name="dueDate" id="due-date"
                                        onChange={handleChange}/>
@@ -154,13 +154,13 @@ function AssignmentEditor() {
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="date2"><b>Available from</b></label>
-                                    <input type="date" className="form-control mb-3" value={assignment.availableDate}
+                                    <input type="date" className="form-control mb-3" defaultValue={assignment.availableDate}
                                            name="availableDate" id="available-date"
                                            onChange={handleChange}/>
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="date3"><b>Until</b></label>
-                                    <input type="date" className="form-control mb-3" value={assignment.untilDate}
+                                    <input type="date" className="form-control mb-3" defaultValue={assignment.untilDate}
                                            name="untilDate" id="until-date"
                                            onChange={handleChange}/>
                                 </div>
