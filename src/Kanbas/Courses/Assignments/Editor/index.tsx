@@ -1,18 +1,44 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { assignments } from "../../../Database";
 import "../index.css";
 import {FaCheckCircle, FaEllipsisV} from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    addAssignment,
+    updateAssignment,
+} from "../reducer";
+import {KanbasState} from "../../../store";
+
 function AssignmentEditor() {
     const { assignmentId } = useParams();
-    const assignment = assignments.find(
-        (assignment) => assignment._id === assignmentId);
+    const assignments = useSelector(
+        (state: KanbasState) => state.assignmentsReducer.assignments
+    );
+
+    const assignment = assignments.find(assignment => assignment._id === assignmentId) ||
+        {
+            _id: new Date().toString,
+            title: "New Assignment",
+            description: "New Assignment Description",
+            points: 100,
+            course: "RS101"
+        };
     const { courseId } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [localAssignment, setLocalAssignment] = useState({ ...assignment });
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setLocalAssignment((prev: any) => ({ ...prev, [name]: value }));
+    };
+
+
     const handleSave = () => {
-        console.log("Actually saving assignment TBD in later assignments");
+        {assignmentId === "new" ? dispatch(addAssignment(localAssignment))
+            : dispatch(updateAssignment(localAssignment))}
         navigate(`/Kanbas/Courses/${courseId}/Assignments`);
     };
+
     return (
         <>
             <div className="d-flex align-items-center float-end mb-4">
@@ -26,27 +52,23 @@ function AssignmentEditor() {
             </div>
             <div>
                 <h2>Assignment Name</h2>
-                <input value={assignment?.title}
-                       className="form-control mb-2" />
+                <input defaultValue={assignment.title} className="form-control mb-2" name="title"
+                       onChange={handleChange}
+                />
                 <div className="mb-3">
-                <textarea
-                    className="form-control"
-                    id="assignment_description"
-                    rows={5}
-                    defaultValue="This assignment describes how to install the development environment for creating and working with Web applications we will be developing this semester. We will add new content every week, pushing the code to a GitHub source repository, and then deploying the content to a remote server hosted on Netlify">
-                </textarea>
+                <textarea className="form-control mb-3" id="assiDes" name="description"
+                          onChange={handleChange}>
+          {assignment.description}
+      </textarea>
                 </div>
                 <div className="row">
                     <div className="col-md-3 text-end">
                         <label htmlFor="assignment_points" className="form-label">Points</label>
                     </div>
                     <div className="col-md-6 mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="assignment_points"
-                            defaultValue="100"
-                        />
+                        <input type="number" id="points" className="form-control" defaultValue="100" max="100" min="0"
+                               name="points"
+                               onChange={handleChange}/>
                     </div>
                 </div>
                 <div className="row">
@@ -122,19 +144,25 @@ function AssignmentEditor() {
                                     <option value="VAL1" selected>Everyone</option>
                                 </select>
                             </div>
-                            <div className="form-group">
-                                <b>Due</b>
-                                <label htmlFor="date"></label>
-                                <input type="date" className="form-control mb-3" id="date" defaultValue="2023-09-18" />
+                            <div className="col-md-12 mb-3">
+                                <label htmlFor="due-date" className="fw-bold">Due</label>
+                                <input type="date" className="form-control mb-3" value={assignment.dueDate}
+
+                                       name="dueDate" id="due-date"
+                                       onChange={handleChange}/>
                             </div>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="date2"><b>Available from</b></label>
-                                    <input type="date" className="form-control" id="date2" defaultValue="2023-09-06" />
+                                    <input type="date" className="form-control mb-3" value={assignment.availableDate}
+                                           name="availableDate" id="available-date"
+                                           onChange={handleChange}/>
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="date3"><b>Until</b></label>
-                                    <input type="date" className="form-control" id="date3" defaultValue="" />
+                                    <input type="date" className="form-control mb-3" value={assignment.untilDate}
+                                           name="untilDate" id="until-date"
+                                           onChange={handleChange}/>
                                 </div>
                             </div>
                         </div>

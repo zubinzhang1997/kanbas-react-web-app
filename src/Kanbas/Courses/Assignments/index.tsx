@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import {
     FaCaretDown,
     FaCheckCircle,
@@ -7,14 +7,36 @@ import {
     FaRegFileAlt
 } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-import { assignments } from "../../Database";
 import "./index.css";
 import {PiDotsSixVerticalBold, PiDotsThreeVerticalBold} from "react-icons/pi";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    deleteAssignment,
+
+} from "./reducer";
+import { useNavigate } from "react-router-dom";
+import dateFormated from "./date";
+import {KanbasState} from "../../store";
+import {BsFillTrashFill} from "react-icons/bs";
 
 function Assignments() {
     const { courseId } = useParams();
+    const assignments = useSelector((state: KanbasState) => state.assignmentsReducer.assignments);
+    const assignment = useSelector((state: KanbasState) => state.assignmentsReducer.assignment);
     const assignmentList = assignments.filter(
         (assignment) => assignment.course === courseId);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const deleteConfirmation = (assignmentId: any) => {
+        const isConfirmed = window.confirm("Do you want to delete this assignment?");
+        if (isConfirmed) {
+            dispatch(deleteAssignment(assignmentId));
+        }
+    };
+    const createNewAssignment = () => {
+        navigate(`/Kanbas/Courses/${courseId}/Assignments/new`);
+    };
+
     return (
         <>
             <div className="my-4">
@@ -23,7 +45,7 @@ function Assignments() {
                 <div className="float-end m-0 straight-button">
                     <button className="btn btn-light btn-outline-secondary">
                         <FaPlus className="mb-1"/> Group </button>
-                    <button className="btn btn-danger">
+                    <button onClick={ createNewAssignment } className="btn btn-danger">
                         <FaPlus className="mb-1"/> Assignment</button>
                     <button className="btn btn-light btn-outline-secondary">
                         <FaEllipsisV className="mb-1"/></button>
@@ -57,14 +79,20 @@ function Assignments() {
                                             Multiple Modules
                                         </Link>
                                         <span className="wd-due-points">
-                                            Due Sep 18 at 11:59pm | 100 pts
-                                        </span>
+                      {assignment?.availableDate && <>| Not available until {dateFormated(assignment?.availableDate)} at 12:00 am </>}
+                                            | Due {dateFormated(assignment?.dueDate)} at 11:59pm | {assignment.points} pts
+                    </span>
 
                                     </p>
                                     <span className="ms-auto">
-                    <FaCheckCircle className="text-success fs-5 me-2" />
-                    <PiDotsThreeVerticalBold className="fs-4 ms-2" />
-                  </span>
+                                        <FaCheckCircle className="text-success fs-5 me-2" />
+                                        <PiDotsThreeVerticalBold
+                                            onClick={() => navigate(`/Kanbas/Courses/${courseId}/Assignments/Edit`)}
+                                            className="fs-3" />
+                                        <BsFillTrashFill onClick={() => deleteConfirmation(assignment._id)}/>
+                                    </span>
+
+
                                 </div>
                             </li>
                         ))}

@@ -2,8 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./index.css"; // feel free to use the CSS from previous assignments
 function CourseNavigation() {
     const links = ["Home", "Modules", "Piazza", "Assignments",
-    "Quizzes", "Grades", "People", "Panopto Video", "Discussions", "Announcements",
-    "Pages", "Files", "Rubrics", "Outcomes", "Collaboration", "Syllabus", "Settings"];
+    "Quizzes", "Grades", "People", "Panopto Video", "Discussions", "Syllabus", "Settings"];
     const { pathname } = useLocation();
     return (
         <div className="d-flex">

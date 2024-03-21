@@ -1,68 +1,78 @@
-import React, { useState } from "react";
+import React from "react";
 import "./index.css";
-import { modules } from "../../Database";
-import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import { useParams } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { addModule, deleteModule, updateModule, setModule } from "./reducer";
+import { KanbasState } from "../../store";
+import {FaCheckCircle, FaEllipsisV, FaPlusCircle} from "react-icons/fa";
+import {PiDotsThreeVerticalBold} from "react-icons/pi";
+
+
 function ModuleList() {
     const { courseId } = useParams();
-    const modulesList = modules.filter((module) => module.course === courseId);
-    const [selectedModule, setSelectedModule] = useState(modulesList[0]);
+    const moduleList = useSelector((state: KanbasState) => state.modulesReducer.modules);
+    const module = useSelector((state: KanbasState) => state.modulesReducer.module);
+    const dispatch = useDispatch();
+
+
+
     return (
-        <>
-            <div className="d-flex flex-row justify-content-end straight-button my-4">
-                <button className="btn btn-light me-1 ellipsis" type="button">
-                    Collapse All
-                </button>
-                <button className="btn btn-light me-1 ellipsis" type="button">
-                    View Progress
-                </button>
-                <div className="dropdown">
-                    <button className="btn btn-light btn-outline-secondary dropdown-toggle"
-                            type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <FaCheckCircle className="ms-2 text-success" /> Publish All
+        <ul className="list-group">
+            <li className="list-group-item">
+                <div className="button-group">
+
+                    <button className="btn btn-success" onClick={() => dispatch(addModule({ ...module, course: courseId }))}>
+                        Add
+                    </button>
+                    <span className="button-spacer"></span>
+                    <button className="btn btn-warning" onClick={() => dispatch(updateModule(module))}>
+                        Update
                     </button>
                 </div>
-                <button className="btn btn-danger me-1 ellipsis" type="button">
-                    <i className="fa fa-plus" aria-hidden="true"></i> Module
-                </button>
-                <button className="btn btn-light btn-outline-secondary">
-                    <FaEllipsisV className="mb-1"/>
-                </button>
-            </div>
+                <div className="textarea-container">
+                    <input
+                        value={module.name}
+                        onChange={(e) => dispatch(setModule({ ...module, name: e.target.value }))}
+                        placeholder="New Module"
+                        className="form-control"
+                    />
+                </div>
+                <div className="textarea-container">
+          <textarea
+              value={module.description}
+              onChange={(e) => dispatch(setModule({ ...module, description: e.target.value }))}
+              placeholder="New Description"
+              className="form-control"
+          />
+                </div>
+            </li>
+            {moduleList
+                .filter((module) => module.course === courseId)
+                .map((module, index) => (
+                    <li key={index} className="list-group-item">
+                        <span className="float-end ">
+                            <button className="btn btn-danger delete-button me-2"
+                                onClick={() => dispatch(deleteModule(module._id))}>
+                                Delete
+                            </button>
+                            <button className="btn btn-success delete-button me-2"
+                                onClick={() => dispatch(setModule(module))}>
+                                Edit
+                            </button>
+                            <FaCheckCircle className="text-success" />
+                            <PiDotsThreeVerticalBold className="fs-3" />
+
+                        </span>
+                        <h3>{module.name}</h3>
+
+                        <p>{module.description}</p>
 
 
-            <ul className="list-group wd-modules">
-                {modulesList.map((module, index) => (
-                    <li key={index}
-                        className="list-group-item"
-                        onClick={() => setSelectedModule(module)}>
-                        <div>
-                            <FaEllipsisV className="me-2" />
-                            {module.name}
-                            <span className="float-end">
-                <FaCheckCircle className="text-success" />
-                <FaPlusCircle className="ms-2" />
-                <FaEllipsisV className="ms-2" />
-              </span>
-                        </div>
-                        {selectedModule._id === module._id && (
-                            <ul className="list-group">
-                                {module.lessons?.map((lesson, index) => (
-                                    <li className="list-group-item" key={index}>
-                                        <FaEllipsisV className="me-2" />
-                                        {lesson.name}
-                                        <span className="float-end">
-                      <FaCheckCircle className="text-success" />
-                      <FaEllipsisV className="ms-2" />
-                    </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+
                     </li>
                 ))}
-            </ul>
-        </>
+        </ul>
     );
 }
+
 export default ModuleList;
